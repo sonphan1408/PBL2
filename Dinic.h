@@ -1,4 +1,6 @@
 #include"Graph.h"
+#include "MyQueue.cpp"
+#include "MyQueue.h"
 using namespace std;
 class Dinic
 {

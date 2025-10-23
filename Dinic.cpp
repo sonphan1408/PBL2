@@ -1,22 +1,22 @@
 #include "Dinic.h"
-#include <queue>
+
 using namespace std;
 #define INF 99999
 bool Dinic::BFS()
 {   
-    cout << "[DEBUG] BFS started\n"; // 🟡 thêm dòng này
+    cout << "[DEBUG] BFS started\n";
     // khoi tao level
     level.assign(g.size()+1,-1);
     // khoi tao queue
-    queue<int> q;
+    Queue<int> q(100);
     level[s] = 0;
-    q.push(s);
+    q.enqueue(s);
     auto &adj = g.getAdj();
     
-    while(!q.empty()){
-        int u = q.front();
-        q.pop();
-        cout << "  Visiting node: " << u << endl; // 🟡 thêm dòng n
+    while(!q.isEmpty()){
+        int u = q.getFront();
+        q.dequeue();
+        cout << "  Visiting node: " << u << endl; 
       
 
         // duyet cac canh ke
@@ -26,14 +26,14 @@ bool Dinic::BFS()
          << " cap=" << v.capacity << "\n";
             if(level[v.to] == -1 && v.flow < v.capacity){
                 level[v.to] = level[u] + 1;
-                q.push(v.to);  
+                q.enqueue(v.to);  
                 cout << "    Found edge: " << u << " -> " << v.to
                 << " (flow=" << v.flow << ", cap=" << v.capacity << ")\n";
             }
         }
     }
     cout << "[DEBUG] BFS finished, reachable sink? "
-         << (level[t] != -1 ? "YES" : "NO") << endl; // 🟡 dòng này
+         << (level[t] != -1 ? "YES" : "NO") << endl; 
     return level[this->t] != -1;
 }
 int Dinic::DFS(int u, int pushed)

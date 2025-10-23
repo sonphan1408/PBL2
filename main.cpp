@@ -10,7 +10,7 @@ int main() {
     
 
     for (int i = 0; i < m; i++) {
-        int u, v, c;
+        int u, v, c;  
         cin >> u >> v >> c;
         g.addEdge(u, v, c);
     }
