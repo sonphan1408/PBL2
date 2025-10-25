@@ -8,7 +8,7 @@ bool Dinic::BFS()
     // khoi tao level
     level.assign(g.size()+1,-1);
     // khoi tao queue
-    Queue<int> q(100);
+    Queue<int> q(g.size() + 1);
     level[s] = 0;
     q.enqueue(s);
     auto &adj = g.getAdj();
