@@ -43,7 +43,7 @@ int Dinic::DFS(int u, int pushed)
     
 
     for(int &i = pos[u]; i < adj[u].size();i++){
-        Edge &e = adj[u][i];
+        Edge &e = adj[u][i];    
         if(level[e.to] == level[u] + 1 && e.flow < e.capacity){
             int flow = DFS(e.to, min(pushed,e.capacity - e.flow));
             if (flow > 0){

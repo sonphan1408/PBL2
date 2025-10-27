@@ -1,12 +1,15 @@
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -Wall
-OBJS = main.o Dinic.o Graph.o Problem2.o   
+OBJS = main.o Dinic.o Graph.o Problem1.o Problem2.o   
 
 main.exe: $(OBJS)
 	$(CXX) $(CXXFLAGS) -o main.exe $(OBJS)
 
-main.o: main.cpp Problem2.h Problem.h
+main.o: main.cpp Problem1.h Problem2.h Problem.h
 	$(CXX) $(CXXFLAGS) -c main.cpp
+
+Problem1.o: Problem1.cpp Problem1.h Problem.h
+	$(CXX) $(CXXFLAGS) -c Problem1.cpp
 
 Problem2.o: Problem2.cpp Problem2.h Problem.h
 	$(CXX) $(CXXFLAGS) -c Problem2.cpp

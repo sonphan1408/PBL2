@@ -21,3 +21,8 @@ int Graph::size()
 {
     return n;
 }
+void Graph::setSize(int m)
+{
+    this->n = m;
+    adj.resize(m+1);
+}

@@ -1,5 +1,6 @@
 #include "Dinic.h"
 #include "Problem2.h"
+#include "Problem1.h"
 using namespace std;
 int main() {
 
@@ -28,8 +29,8 @@ int main() {
     //   int maxflow = dinic.maxFlow();
 
     //   cout << "\n==> Luong cuc dai (Max Flow): " << maxflow << "\n";
-    Problem* problem = new Problem2();
-    problem->readInput("test.txt");
+    Problem* problem = new Problem1();
+    problem->readInput("test1.txt");
     problem->solve();
     problem->show();
 

@@ -8,12 +8,13 @@ private:
     int n;
     vector<vector<Edge>> adj;
 public:
-
+    Graph(){};
     Graph(int n);
     ~Graph(){};
     void addEdge(int u, int v, int cap, int cost = 0);
      vector<vector<Edge>> &getAdj() ;
     int size();
+    void setSize(int m);
 };
 
 
