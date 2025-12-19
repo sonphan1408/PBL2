@@ -17,14 +17,12 @@ bool Dinic::BFS()
         int u = q.getFront();
         q.dequeue();
         cout << "  Visiting node: " << u << endl; 
-      
-
         // duyet cac canh ke
         for(auto &v : adj[u]){
             cout << "[DEBUG] " << u << " -> " << v.to
          << " flow=" << v.flow
          << " cap=" << v.capacity << "\n";
-            if(level[v.to] == -1 && v.flow < v.capacity){
+            if(level[v.to] == -1 && v.flow < v.capacity && v.active == 1){
                 level[v.to] = level[u] + 1;
                 q.enqueue(v.to);  
                 cout << "    Found edge: " << u << " -> " << v.to
@@ -44,7 +42,7 @@ int Dinic::DFS(int u, int pushed)
 
     for(int &i = pos[u]; i < adj[u].size();i++){
         Edge &e = adj[u][i];    
-        if(level[e.to] == level[u] + 1 && e.flow < e.capacity){
+        if(level[e.to] == level[u] + 1 && e.flow < e.capacity && e.active == 1 ){
             int flow = DFS(e.to, min(pushed,e.capacity - e.flow));
             if (flow > 0){
                 cout << "  Pushing flow " << flow << " along edge " << u

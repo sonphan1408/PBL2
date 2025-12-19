@@ -1,0 +1,6 @@
+5
+1 Kho_Trung_Tam Kho 0
+2 Xa_A KhuDanCu 40
+3 Xa_B KhuDanCu 30
+4 TrungChuyen_1 TrungChuyen 0
+5 Xa_C KhuDanCu 50

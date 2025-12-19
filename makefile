@@ -1,24 +1,33 @@
+# ====== Makefile SDL2 cho MSYS2 MinGW64 ======
+
+# --------- Trình biên dịch ---------
 CXX = g++
 CXXFLAGS = -std=c++17 -O2 -Wall
-OBJS = main.o Dinic.o Graph.o Problem1.o Problem2.o   
 
-main.exe: $(OBJS)
-	$(CXX) $(CXXFLAGS) -o main.exe $(OBJS)
+# --------- Đường dẫn đến SDL2 (chỉnh theo thư mục của bạn) ---------
+SDL2_INCLUDE = D:/Study/PBL2/SDL2-2.32.8/x86_64-w64-mingw32/include
+SDL2_LIB = D:/Study/PBL2/SDL2-2.32.8/x86_64-w64-mingw32/lib
 
-main.o: main.cpp Problem1.h Problem2.h Problem.h
-	$(CXX) $(CXXFLAGS) -c main.cpp
+# --------- File nguồn và output ---------
+SRC = main.cpp Graph.cpp Dinic.cpp Problem1.cpp Problem2.cpp
+OBJ = $(SRC:.cpp=.o)
+TARGET = main.exe
 
-Problem1.o: Problem1.cpp Problem1.h Problem.h
-	$(CXX) $(CXXFLAGS) -c Problem1.cpp
+# --------- Quy tắc build chính ---------
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) -L$(SDL2_LIB) -lmingw32 -lSDL2main -lSDL2
 
-Problem2.o: Problem2.cpp Problem2.h Problem.h
-	$(CXX) $(CXXFLAGS) -c Problem2.cpp
+# --------- Biên dịch từng file .cpp thành .o ---------
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -I$(SDL2_INCLUDE) -c $< -o $@
 
-Graph.o: Graph.cpp Graph.h Edge.h
-	$(CXX) $(CXXFLAGS) -c Graph.cpp
+# --------- Chạy chương trình sau khi build ---------
+run: $(TARGET)
+	./$(TARGET)
 
-Dinic.o: Dinic.cpp Dinic.h Graph.h MyQueue.h
-	$(CXX) $(CXXFLAGS) -c Dinic.cpp
-
+# --------- Dọn file tạm ---------
 clean:
-	del *.o main.exe
+	rm -f *.o *.exe
+
+# --------- Đánh dấu các target giả ---------
+.PHONY: clean run
