@@ -7,13 +7,21 @@ Graph::Graph(int n)
 }
 void Graph::addEdge(int u,int v,int cap, int cost, bool active )
 {
-    Edge a(v, adj[v].size(), cap, cost,active);
-    Edge b(u, adj[u].size(), 0, -cost,active);
+    data.push_back(OriginalEdge(u, v, cap, cost, active));
+
+    
+    if (!active) return;
+
+    Edge a(v, adj[v].size(), cap, cost, true);
+    Edge b(u, adj[u].size(), 0, -cost, true);
+
     adj[u].push_back(a);
     adj[v].push_back(b);
-    
 
-}
+    }
+
+
+
  vector<vector<Edge>>& Graph::getAdj() 
 {
     return adj;
