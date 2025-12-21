@@ -12,7 +12,10 @@ Application::Application()
 {
     graphLoaded = false;
 }
-
+string Application::getFileName()
+{
+    return fileName;
+}
 
 
 void Application::loadGraphList(const string &filename)
@@ -40,13 +43,14 @@ void Application::loadGraphList(const string &filename)
 
 void Application::chooseGraph()
 {
+
     if (graphFiles.empty()) {
         cout << "Danh sach do thi rong!\n";
         return;
     }
 
     cout << "\n===== DANH SACH DO THI =====\n";
-    for (int i = 0; i < graphFiles.size(); i++) {
+    for (auto i = 0; i < graphFiles.size(); i++) {
         cout << i + 1 << ". " << graphFiles[i] << endl;
     }
 
@@ -58,10 +62,41 @@ void Application::chooseGraph()
         cout << "Lua chon khong hop le!\n";
         return;
     }
-
+    fileName = graphFiles[choice - 1];
     loadGraphFile(graphFiles[choice - 1]);
 }
 
+void Application::saveGraph()
+{
+    
+
+    ofstream out(fileName);
+    if (!out.is_open()) {
+        cout << "Khong mo duoc file de ghi!\n";
+        return;
+    }
+
+    out << g.size() << " " << g.getNumberEdge() << "\n";
+
+    auto &locs = g.getLocations();
+    out << locs.size() << "\n";
+    for (auto &l : locs) {
+        out << l.getID() << " "
+            << l.getName() << " "
+            << l.getType() << " "
+            << l.getDemand() << "\n";
+    }
+
+    auto &data = g.getOriginal();
+    for (auto &e : data) {
+        out << e.u << " " << e.v << " "
+            << e.cap << " " << e.cost << " "
+            << e.active << "\n";
+    }
+
+    out.close();
+    cout << "Da luu do thi vao file: " << fileName << endl;
+}
 
 
 void Application::loadGraphFile(const string &filename)
@@ -81,7 +116,7 @@ void Application::loadGraphFile(const string &filename)
     g.setSize(n);
     g.setNumberEdge(m);
 
-    /* ===== LOCATIONS ===== */
+   
     int k;
     in >> k;
     for (int i = 0; i < k; i++) {
@@ -91,7 +126,6 @@ void Application::loadGraphFile(const string &filename)
         g.addLocation(Location(id, name, type, demand));
     }
 
-    /* ===== EDGES ===== */
     for (int i = 0; i < m; i++) {
         int u, v, cap, cost;
         bool active;
@@ -117,7 +151,7 @@ void Application::editGraphMenu()
     int choice;
     cout << "\n=== CHINH SUA DO THI ===\n";
     cout << "1. Them canh moi\n";
-    cout << "2. Bat/Tat canh (Problem 2)\n";
+    cout << "2. Bat/Tat canh \n";
     cout << "0. Quay lai\n";
     cout << "Chon: ";
     cin >> choice;
@@ -138,6 +172,7 @@ void Application::addEdgeMenu()
 
     g.addEdge(u, v, cap, cost, active);
     cout << "Da them canh!\n";
+    saveGraph();
 }
 
 void Application::toggleEdgeMenu()
@@ -161,7 +196,10 @@ void Application::toggleEdgeMenu()
     }
 
     data[id].active = !data[id].active;
+    g.rebuildAdj();
+    
     cout << "Da doi trang thai canh!\n";
+    saveGraph();
 }
 
 

@@ -12,3 +12,8 @@ int Location::getDemand()
 {
     return demand;
 }
+string Location::getName()
+{
+    return name;
+}
+Location::~Location() {}

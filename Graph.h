@@ -29,6 +29,7 @@ public:
     int getNumberEdge();
     void setSize(int size);
     void setNumberEdge(int size);
+    void rebuildAdj();
 };
 
 

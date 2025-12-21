@@ -8,7 +8,8 @@ class Application
 private:
     Graph g;                         // graph đang thao tác
     bool graphLoaded;                // đã nạp graph chưa
-    std::vector<string> graphFiles; // danh sách file graph
+    vector<string> graphFiles;    
+    string fileName;
 
 public:
     Application();
@@ -29,4 +30,7 @@ public:
 
   
     void menu();
+    void saveGraph();
+    string getFileName();
+
 };

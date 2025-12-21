@@ -8,12 +8,11 @@ Graph::Graph(int n)
 void Graph::addEdge(int u,int v,int cap, int cost, bool active )
 {
     data.push_back(OriginalEdge(u, v, cap, cost, active));
-
+  
     
-    if (!active) return;
 
-    Edge a(v, adj[v].size(), cap, cost, true);
-    Edge b(u, adj[u].size(), 0, -cost, true);
+    Edge a(v, adj[v].size(), cap, cost, active);
+    Edge b(u, adj[u].size(), 0, -cost, active);
 
     adj[u].push_back(a);
     adj[v].push_back(b);
@@ -55,4 +54,20 @@ vector<OriginalEdge>& Graph::getOriginal()
 void Graph::setNumberEdge(int size)
 {   
     this->m = size;
+}
+void Graph::rebuildAdj()
+{
+    
+    adj.clear();
+    adj.resize(n + 1);
+
+   
+    for (auto &e : data) {
+        
+            Edge a(e.v, adj[e.v].size(), e.cap, e.cost, e.active);
+            Edge b(e.u, adj[e.u].size(), 0, -e.cost, e.active);
+            adj[e.u].push_back(a);
+            adj[e.v].push_back(b);
+        
+    }
 }

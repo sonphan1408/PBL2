@@ -1,33 +1,22 @@
-# ====== Makefile SDL2 cho MSYS2 MinGW64 ======
-
-# --------- Trình biên dịch ---------
 CXX = g++
-CXXFLAGS = -std=c++17 -O2 -Wall
+CXXFLAGS = -std=c++17 -Wall -Wextra -O2
 
-# --------- Đường dẫn đến SDL2 (chỉnh theo thư mục của bạn) ---------
-SDL2_INCLUDE = D:/Study/PBL2/SDL2-2.32.8/x86_64-w64-mingw32/include
-SDL2_LIB = D:/Study/PBL2/SDL2-2.32.8/x86_64-w64-mingw32/lib
+OBJS = main.o \
+       Application.o \
+       Graph.o \
+       Dinic.o \
+       Problem1.o \
+       Problem2.o \
+       Problem3.o \
+       Location.o \
+       OriginalEdge.o \
+       Edge.o
 
-# --------- File nguồn và output ---------
-SRC = main.cpp Graph.cpp Dinic.cpp Problem1.cpp Problem2.cpp
-OBJ = $(SRC:.cpp=.o)
-TARGET = main.exe
+app: $(OBJS)
+	$(CXX) $(CXXFLAGS) -o app $(OBJS)
 
-# --------- Quy tắc build chính ---------
-$(TARGET): $(OBJ)
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJ) -L$(SDL2_LIB) -lmingw32 -lSDL2main -lSDL2
-
-# --------- Biên dịch từng file .cpp thành .o ---------
 %.o: %.cpp
-	$(CXX) $(CXXFLAGS) -I$(SDL2_INCLUDE) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# --------- Chạy chương trình sau khi build ---------
-run: $(TARGET)
-	./$(TARGET)
-
-# --------- Dọn file tạm ---------
 clean:
-	rm -f *.o *.exe
-
-# --------- Đánh dấu các target giả ---------
-.PHONY: clean run
+	rm -f *.o app

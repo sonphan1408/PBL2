@@ -11,7 +11,6 @@ public:
 public:
     OriginalEdge(int u, int v, int cap, int cost,bool active) : u(u), v(v), cap(cap), cost(cost), active(active){};
     ~OriginalEdge();
-    // bool getActive();
-    // int getCost();
+    void setActive(bool set);
 };
 
