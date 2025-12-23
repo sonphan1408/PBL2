@@ -1,9 +1,9 @@
 #include"Graph.h"
 #define MAX 10
-Graph::Graph(int m)
+Graph::Graph(int n)
 {
     this->n = 0;
-    adj.resize(m+1);
+    adj.resize(n+1);
     this->m = 0;
 }
 void Graph::addEdge(int u,int v,int cap, int cost, bool active )

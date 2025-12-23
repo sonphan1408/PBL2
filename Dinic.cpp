@@ -67,6 +67,6 @@ int Dinic::maxFlow()
         }
        // cout << "[DEBUG] One BFS phase done, total flow = " << maxF << endl;
     }
-    cout << " Max flow  = " << maxF << endl;
+   // cout << " Max flow  = " << maxF << endl;
     return maxF;    
-}
+}   

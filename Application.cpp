@@ -112,7 +112,7 @@ void Application::loadGraphFile(const string &filename)
     int n, m;
     in >> n >> m;
     
-    g = Graph(m);
+    g = Graph(n);
     graphLoaded = true;
     for (int i = 0; i < n; i++) {
         int id, demand;

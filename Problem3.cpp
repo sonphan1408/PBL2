@@ -28,10 +28,10 @@ Problem3::Problem3(Graph &g)
             if (id < 1 || id > N) continue; 
     
             if (loc.getType() == "warehouse") {
-                temp.addEdge(SS, id, INF);
+                temp.addEdge(SS, id, INF,0,true);
             }
             else if (loc.getType() == "area") {
-                temp.addEdge(id, TT, loc.getDemand());
+                temp.addEdge(id, TT, loc.getDemand(),0,true);
             }
         }
     
