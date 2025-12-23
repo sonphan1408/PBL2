@@ -108,18 +108,13 @@ void Application::loadGraphFile(const string &filename)
     }
 
     // reset graph
-    g = Graph();
-    graphLoaded = true;
 
     int n, m;
     in >> n >> m;
-    g.setSize(n);
-    g.setNumberEdge(m);
-
-   
-    int k;
-    in >> k;
-    for (int i = 0; i < k; i++) {
+    
+    g = Graph(m);
+    graphLoaded = true;
+    for (int i = 0; i < n; i++) {
         int id, demand;
         string name, type;
         in >> id >> name >> type >> demand;
@@ -149,10 +144,12 @@ void Application::editGraphMenu()
     }
 
     int choice;
-    cout << "\n=== CHINH SUA DO THI ===\n";
-    cout << "1. Them canh moi\n";
-    cout << "2. Bat/Tat canh \n";
-    cout << "0. Quay lai\n";
+    cout<<"\n";
+    cout << "  +----------- MENU CHINH -----------+\n";
+    cout<<  "  |  1. Them canh moi                |\n";
+    cout << "  |  2. Bat/Tat canh                 | \n";
+    cout << "  |  0. Quay lai                     |\n";
+    cout << "  +----------------------------------+ \n";
     cout << "Chon: ";
     cin >> choice;
 
@@ -171,6 +168,7 @@ void Application::addEdgeMenu()
     cin >> u >> v >> cap >> cost >> active;
 
     g.addEdge(u, v, cap, cost, active);
+    
     cout << "Da them canh!\n";
     saveGraph();
 }
@@ -179,7 +177,7 @@ void Application::toggleEdgeMenu()
 {
     auto &data = g.getOriginal();
 
-    cout << "\n=== DANH SACH CANH ===\n";
+    cout << "\n+----- DANH SACH CANH -------+\n";
     for (int i = 0; i < data.size(); i++) {
         cout << i << ": (" << data[i].u << " -> " << data[i].v
              << "), active = " << data[i].active
@@ -243,13 +241,14 @@ void Application::menu()
 
     int choice;
     do {
-        cout << "\n===== MENU CHINH =====\n";
-        cout << "1. Chon do thi\n";
-        cout << "2. Chinh sua do thi\n";
-        cout << "3. Bai toan 1 (Max Flow)\n";
-        cout << "4. Bai toan 2 (Toi uu sua chua)\n";
-        cout << "5. Bai toan 3 (Phan phoi cuu tro)\n";
-        cout << "0. Thoat\n";
+        cout << "  +------------- MENU CHINH -------------+\n";
+        cout<<  "  |  1. Chon do thi                      |\n";
+        cout << "  |  2. Chinh sua do thi                 |\n";
+        cout << "  |  3. Bai toan 1 (Max Flow)            | \n";
+        cout << "  |  4. Bai toan 2 (Toi uu sua chua)     |\n";
+        cout << "  |  5. Bai toan 3 (Phan phoi cuu tro)   |\n";
+        cout << "  |  0. Thoat                            |\n";
+        cout << "  +--------------------------------------+ \n";
         cout << "Chon: ";
         cin >> choice;
 

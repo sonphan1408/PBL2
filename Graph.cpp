@@ -1,15 +1,16 @@
 #include"Graph.h"
-Graph::Graph(int n)
+#define MAX 10
+Graph::Graph(int m)
 {
-    this->n = n;
-    adj.resize(n+1);
+    this->n = 0;
+    adj.resize(m+1);
     this->m = 0;
 }
 void Graph::addEdge(int u,int v,int cap, int cost, bool active )
 {
     data.push_back(OriginalEdge(u, v, cap, cost, active));
   
-    
+    m++;
 
     Edge a(v, adj[v].size(), cap, cost, active);
     Edge b(u, adj[u].size(), 0, -cost, active);
@@ -41,6 +42,7 @@ void Graph::setSize(int size)
 }
 void Graph::addLocation(const Location &loc)
 {
+    n++;
     locations.push_back(loc);
 }
 int Graph::getNumberEdge()

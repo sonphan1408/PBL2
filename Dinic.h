@@ -6,7 +6,7 @@ class Dinic
 {
 private:
     Graph &g;
-    int s,t;
+    int s,t;    
     vector<int> level;
     vector<int> pos;  
 
